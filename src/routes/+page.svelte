@@ -1,6 +1,7 @@
 <script>
-  // Your JavaScript code goes here
+  import '../tailwind.css';
 </script>
+
 
 <style>
   /* Your CSS styles go here */
@@ -19,5 +20,6 @@
 <!-- Your HTML markup goes here -->
 <main>
   <h1>Welcome to Overstat</h1>
+  <h1 class="text-4xl font-bold">Hello, SvelteKit and Tailwind CSS!</h1>
   <p>Analyze your Overwatch 2 team compositions and improve your game.</p>
 </main>
