@@ -13,38 +13,68 @@
 </script>
 
 <style>
-  /* Your CSS styles go here */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
   h1 {
     font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
+    color: #111827;
   }
 
   p {
     font-size: 1.25rem;
     text-align: center;
+    color: #374151;
+  }
+
+  .container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 1rem;
   }
 </style>
 
 <main>
-  <div class="container mx-auto">
-    <h1 class="text-2xl font-bold mb-8">Top 5 Heroes by Win Rate</h1>
+  <h1>Welcome to Overstat</h1>
+  <p>Analyze your Overwatch 2 team compositions and improve your game.</p>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  <div class="container mt-12">
+    <h1 class="text-4xl font-bold mb-8">Top 5 Heroes by Win Rate</h1>
+
+    <div class="grid">
       <div>
-        <h2 class="text-xl font-semibold mb-4">Damage</h2>
+        <h2>Damage</h2>
         {#each topHeroes('damage') as hero}
           <HeroCard {hero} />
         {/each}
       </div>
       <div>
-        <h2 class="text-xl font-semibold mb-4">Support</h2>
+        <h2>Support</h2>
         {#each topHeroes('support') as hero}
           <HeroCard {hero} />
         {/each}
       </div>
       <div>
-        <h2 class="text-xl font-semibold mb-4">Tank</h2>
+        <h2>Tank</h2>
         {#each topHeroes('tank') as hero}
           <HeroCard {hero} />
         {/each}
