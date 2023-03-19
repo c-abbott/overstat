@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "name": "Hero1",
+    "role": "damage",
+    "winRate": 60
+  },
+
+  {
+    "id": 2,
+    "name": "Hero2",
+    "role": "damage",
+    "winRate": 59
+  },
+
+  {
+    "id": 3,
+    "name": "Hero3",
+    "role": "damage",
+    "winRate": 58
+  },
+
+  {
+    "id": 4,
+    "name": "Hero4",
+    "role": "damage",
+    "winRate": 57
+  },
+
+  {
+    "id": 5,
+    "name": "Hero5",
+    "role": "damage",
+    "winRate": 56
+  }
+]
