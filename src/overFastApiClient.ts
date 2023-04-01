@@ -16,6 +16,7 @@ async function getUserProfile(userId: string): Promise<UserProfile> {
   }
 }
 
+// src/overFastApiClient.ts
 export async function getHeroes(): Promise<Hero[]> {
   const response = await fetch(`https://overfast-api.tekrop.fr/heroes`);
 
@@ -24,7 +25,14 @@ export async function getHeroes(): Promise<Hero[]> {
   }
 
   const heroes: Hero[] = await response.json();
-  return heroes;
+  console.log('API response:', heroes); // Add this line to log the API response
+  return heroes.map((hero: any) => ({
+    key: hero.key,
+    name: hero.name,
+    portraitURL: hero.portrait, // Make sure this field exists and contains the correct URL
+    role: hero.role,
+  }));
 }
+
 
 export { getUserProfile };
