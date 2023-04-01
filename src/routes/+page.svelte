@@ -1,15 +1,29 @@
 <script lang="ts">
   import '../tailwind.css';
   import HeroCard from '../components/HeroCard.svelte';
+
+  import { getHeroes } from '../overFastApiClient';
   import type { Hero } from '../types/Hero';
-  import heroStats from '../data/mockHeroStats.json';
+  
+  let heroes: Hero[] = [];
+
+  async function loadHeroes() {
+    try {
+      heroes = await getHeroes();
+    } catch (error) {
+      console.error('Error fetching heroes:', error);
+    }
+  }
+
+  loadHeroes();
 
   const topHeroes = (role: 'damage' | 'support' | 'tank'): Hero[] => {
-  return (heroStats as Hero[])
-    .filter((hero: Hero) => hero.role === role)
-    .sort((a: Hero, b: Hero) => b.winRate - a.winRate)
-    .slice(0, 5);
-};
+    return heroes
+      .filter((hero: Hero) => hero.role === role)
+      .sort((a: Hero, b: Hero) => b.winRate - a.winRate)
+      .slice(0, 5);
+  };
+
 </script>
 
 <style>
