@@ -1,28 +1,17 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import '../tailwind.css';
-  import HeroCard from '../components/HeroCard.svelte';
-
+  import HeroGrid from '../components/HeroGrid.svelte';
   import { getHeroes } from '../overFastApiClient';
   import type { Hero } from '../types/Hero';
   
   let heroes: Hero[] = [];
 
-  async function loadHeroes() {
-    try {
-      heroes = await getHeroes();
-    } catch (error) {
-      console.error('Error fetching heroes:', error);
-    }
-  }
 
-  loadHeroes();
-
-  const topHeroes = (role: 'damage' | 'support' | 'tank'): Hero[] => {
-    return heroes
-      .filter((hero: Hero) => hero.role === role)
-      .sort((a: Hero, b: Hero) => b.winRate - a.winRate)
-      .slice(0, 5);
-  };
+  onMount(async () => {
+    const data = await getHeroes();
+    heroes = data.sort((a, b) => a.name.localeCompare(b.name));
+  });
 
 </script>
 
@@ -52,19 +41,6 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 2rem;
   }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-  }
-
-  h2 {
-    font-size: 1.75rem;
-    font-weight: bold;
-    color: #1f2937;
-    margin-bottom: 1rem;
-  }
 </style>
 
 <main>
@@ -72,27 +48,7 @@
   <p>Analyze your Overwatch 2 team compositions and improve your game.</p>
 
   <div class="container mt-12">
-    <h1 class="text-4xl font-bold mb-8">Top 5 Heroes by Win Rate</h1>
-
-    <div class="grid">
-      <div>
-        <h2>Damage</h2>
-        {#each topHeroes('damage') as hero}
-          <HeroCard {hero} />
-        {/each}
-      </div>
-      <div>
-        <h2>Support</h2>
-        {#each topHeroes('support') as hero}
-          <HeroCard {hero} />
-        {/each}
-      </div>
-      <div>
-        <h2>Tank</h2>
-        {#each topHeroes('tank') as hero}
-          <HeroCard {hero} />
-        {/each}
-      </div>
-    </div>
+    <h1 class="text-4xl font-bold mb-8">Overwatch Heroes</h1>
+    <HeroGrid {heroes} />
   </div>
 </main>
