@@ -1,6 +1,6 @@
 export interface Hero {
-  id: number;
+  key: string;
   name: string;
+  portraitURL: string;
   role: 'damage' | 'support' | 'tank';
-  winRate: number;
 }
